@@ -27,21 +27,41 @@ let songs = [
 masterPlay.addEventListener('click', (element) => {
     if (audioElement.paused || audioElement.currentTime <= 0) {
         audioElement.play();
+        console.log(audioElement.src);
         masterPlay.classList.remove('fa-play');
         masterPlay.classList.add('fa-pause');
         gif.style.opacity = 1;
-        element.classList.remove('fa-play');
-        element.classList.add('fa-pause');
+        let str= audioElement.src.slice(audioElement.src.length-5).charAt(0)
+        console.log(str)
+        Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
+            console.log(Number(element.id)+1);
+            if(str==(Number(element.id)+1)){
+            element.classList.remove('fa-play');
+            element.classList.add('fa-pause');
+            gif.style.opacity = 1;
+            }
+
+        })
+       
     }
     else {
         audioElement.pause();
         masterPlay.classList.remove('fa-pause');
         masterPlay.classList.add('fa-play');
         gif.style.opacity = 0;
-        element.classList.remove('fa-pause');
-        element.classList.add('fa-play');
+        let str= audioElement.src.slice(audioElement.src.length-5).charAt(0)
+        Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
+            if(str==(Number(element.id)+1)){
+                element.classList.remove('fa-pause');
+                element.classList.add('fa-play');
+                gif.style.opacity = 1;
+                }
+        })
+       
     }
 })
+
+
 
 
 //Listen to events
